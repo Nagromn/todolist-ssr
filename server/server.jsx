@@ -29,6 +29,13 @@ app.get("/", (req, res) => {
       const response = await fetch(
         "https://jsonplaceholder.typicode.com/todos?_limit=10"
       );
+
+      if (!response.ok) {
+        throw new Error(
+          `Échec du fetch : ${response.status} ${response.statusText}`
+        );
+      }
+      
       const todos = await response.json();
 
       // Remplace la balise "<div id="root"></div>" dans le contenu du fichier "index.html" par le rendu du composant "App" au format permet l'interactivité.
